@@ -1,0 +1,6 @@
+@CustomerLogBookAPI_HostAddress = http://localhost:5105
+
+GET {{CustomerLogBookAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

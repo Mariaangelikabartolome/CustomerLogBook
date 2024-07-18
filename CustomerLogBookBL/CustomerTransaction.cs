@@ -47,9 +47,9 @@ namespace CustomerLogBookBL
             return result;
         }
 
-        public bool UpdateCustomer(string name, string address, string contactnumber)
+        public bool UpdateCustomer(string name, string address )
         {
-            Model user = new Model { name = name, address = address, contactnumber = contactnumber };
+            Model user = new Model { name = name, address = address};
 
             return UpdateCustomer(user);
         }

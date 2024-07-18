@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 using CustomerLogBook;
 using System.Data.SqlClient;
+using System.Net;
+using static System.Net.Mime.MediaTypeNames;
 namespace CustomerLogBookDL
     {
         public class SqlDBData
-        {
+    {
             string connectionString
-               = "Data Source =LAPTOP-VESUE4DG\\SQLEXPRESS01; Initial Catalog = CustomerLogBook; Integrated Security = True;";
+            = "Server = tcp:104.214.186.2,1433; Database = CustomerLogBook; User Id = sa; Password = MariaAngel1005?";
+               
 
         SqlConnection sqlConnection;
 
@@ -53,7 +56,7 @@ namespace CustomerLogBookDL
         {
             int success;
 
-            string insertStatement = "INSERT INTO users VALUES (@name, @address, @contactnumber)";
+            string insertStatement = "INSERT INTO Model VALUES (@name, @address, @contactnumber)";
 
             SqlCommand insertCommand = new SqlCommand(insertStatement, sqlConnection);
 
@@ -69,16 +72,17 @@ namespace CustomerLogBookDL
             return success;
         }
 
-        public int UpdateCustomer(string name, string address, string contactnumber)
+        public int UpdateCustomer(string name, string address)
         {
+            ;
             int success;
-
-            string updateStatement = $"UPDATE users SET address = @address WHERE name = @name";
+            string updateStatement = $"UPDATE Model SET address = @address WHERE name = @name";
             SqlCommand updateCommand = new SqlCommand(updateStatement, sqlConnection);
             sqlConnection.Open();
 
             updateCommand.Parameters.AddWithValue("@Address", address);
             updateCommand.Parameters.AddWithValue("@name", name);
+           
 
             success = updateCommand.ExecuteNonQuery();
 
@@ -91,7 +95,7 @@ namespace CustomerLogBookDL
         {
             int success;
 
-            string deleteStatement = $"DELETE FROM users WHERE name = @name";
+            string deleteStatement = $"DELETE FROM Model WHERE name = @name";
             SqlCommand deleteCommand = new SqlCommand(deleteStatement, sqlConnection);
             sqlConnection.Open();
 
