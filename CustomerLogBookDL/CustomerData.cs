@@ -31,7 +31,7 @@ namespace CustomerLogBookDL
             }
             public int AddCustomer(Model user)
             {
-                return sqlData.AddCustomer(user.name, user.address, user.contactnumber);
+                return sqlData.AddCustomer(user.name, user.address, user.contactnumber, user.orders);
             }
             public int UpdateCustomer(Model user)
             {

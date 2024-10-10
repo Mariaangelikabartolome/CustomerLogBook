@@ -13,7 +13,7 @@ namespace CustomerLogBookDL
         public class SqlDBData
     {
             string connectionString
-            = "Server = tcp:104.214.186.2,1433; Database = CustomerLogBook; User Id = sa; Password = MariaAngel1005?";
+            = "Data Source = LAPTOP-CQ7JC7SL\\SQLEXPRESS; Initial Catalog = CustomerLogBook; Integrated Security = True";
                
 
         SqlConnection sqlConnection;
@@ -25,7 +25,7 @@ namespace CustomerLogBookDL
 
         public List<Model> GetUsers()
         {
-            string selectStatement = "SELECT name, address, contactnumber FROM Model";
+            string selectStatement = "SELECT name, address, contactnumber, orders FROM Model";
 
             SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnection);
 
@@ -39,11 +39,13 @@ namespace CustomerLogBookDL
                 string name = reader["name"].ToString();
                 string address = reader["address"].ToString();
                 string contactnumber = reader["contactnumber"].ToString();
+                string orders = reader["orders"].ToString();
 
                 Model readUser = new Model();
                 readUser.name = name;
                 readUser.address = address;
                 readUser.contactnumber = contactnumber;
+                readUser.orders = orders;
                 users.Add(readUser);
             }
 
@@ -52,25 +54,26 @@ namespace CustomerLogBookDL
             return users;
         }
 
-        public int AddCustomer(string name, string address, string contactnumber )
+        public int AddCustomer(string name, string address, string contactnumber, string orders)
         {
             int success;
 
-            string insertStatement = "INSERT INTO Model VALUES (@name, @address, @contactnumber)";
+            string insertStatement = "INSERT INTO Model (name, address, contactnumber, orders) VALUES (@name, @address, @contactnumber, @orders)";
 
             SqlCommand insertCommand = new SqlCommand(insertStatement, sqlConnection);
 
             insertCommand.Parameters.AddWithValue("@name", name);
             insertCommand.Parameters.AddWithValue("@address", address);
             insertCommand.Parameters.AddWithValue("@contactnumber", contactnumber);
+            insertCommand.Parameters.AddWithValue("@orders", orders);
+
             sqlConnection.Open();
-
             success = insertCommand.ExecuteNonQuery();
-
             sqlConnection.Close();
 
             return success;
         }
+
 
         public int UpdateCustomer(string name, string address)
         {

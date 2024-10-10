@@ -16,9 +16,9 @@ namespace CustomerLogBookBL
             return result; 
 
         }
-        public bool CheckIfCustomerNameExists(string name, string address, string contactnumber)
+        public bool CheckIfCustomerNameExists(string name, string address, string contactnumber, string orders)
         {
-            bool result = getservices.GetUser(name, address, contactnumber) != null;
+            bool result = getservices.GetUser(name, address, contactnumber, orders) != null;
             return result;  
         }
     }

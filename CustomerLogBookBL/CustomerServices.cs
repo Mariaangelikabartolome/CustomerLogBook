@@ -24,13 +24,13 @@ namespace CustomerLogBookBL
             }
             return foundCustomer;
         }
-        public Model GetUser(string name, string address, string contactnumber)
+        public Model GetUser(string name, string address, string contactnumber, string orders)
         {
            Model foundCustomer = new Model();
 
             foreach (var user in GetAllUser())
             {
-                if (user.name == name && user.address == address && user.contactnumber == contactnumber)
+                if (user.name == name && user.address == address && user.contactnumber == contactnumber && user.orders== orders)
                 {
                     foundCustomer = user;
                 }

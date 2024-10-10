@@ -27,7 +27,7 @@ namespace CustomerLogBookAPI.Controllers
 
             foreach (var item in activeusers)
             {
-                users.Add(new CustomerLogBookAPI.Model { name = item.name, address = item.address, contactnumber = item.contactnumber });
+                users.Add(new CustomerLogBookAPI.Model { name = item.name, address = item.address, contactnumber = item.contactnumber, orders = item.orders });
             }
 
             return users;
@@ -36,7 +36,7 @@ namespace CustomerLogBookAPI.Controllers
         [HttpPost]
         public JsonResult AddUser(Model request)
         {
-            var result = _userTransactionServices.CreateCustomer(request.name, request.address, request.contactnumber);
+            var result = _userTransactionServices.CreateCustomer(request.name, request.address, request.contactnumber, request.orders);
 
             return new JsonResult(result);
         }

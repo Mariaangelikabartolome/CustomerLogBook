@@ -8,6 +8,8 @@ namespace CustomerLogBookAPI
 
         public string contactnumber { get; set; }
 
+        public string orders { get; set; }
+
 
     }
 }
